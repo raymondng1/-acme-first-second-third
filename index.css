@@ -1,0 +1,19 @@
+h1{
+    display: flex;
+    justify-content: center;
+}
+
+body > div {
+    display: flex;
+    justify-content: space-between;
+}
+
+body > div > div {
+    border: solid 2px orange;
+    height: 15rem;
+    width: 10rem;
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+}
+

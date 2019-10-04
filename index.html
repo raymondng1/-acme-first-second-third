@@ -1,0 +1,88 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Acme First, Second, Third</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <h1>Acme First, Second, Third</h1>
+
+    <div id='lists'>
+
+        <div id='first'>
+
+        </div>
+
+        <div id ='second'>
+
+        </div>
+
+        <div id="third">
+
+
+        </div>
+
+
+    </div>
+
+    <script>
+        const slots = ['first', 'second', 'third'];
+
+       
+        const listItems = document.querySelectorAll('div div');
+
+        //creating the left button
+        for(let i =0; i < listItems.length;i++){
+            const leftButton = document.createElement('button');
+            leftButton.classList = 'left';
+            const leftButtonText = document.createTextNode('<');
+            leftButton.appendChild(leftButtonText);
+            listItems[i].appendChild(leftButton);
+        };
+        
+        //creating the right button 
+        for(let i =0; i < listItems.length;i++){
+            const rightButton = document.createElement('button');
+            rightButton.classList ='right';
+            const rightButtonText = document.createTextNode('>');
+            rightButton.appendChild(rightButtonText);
+            listItems[i].appendChild(rightButton);
+        }
+        
+        //display the slot number data in the array
+        for(let i =0;i<listItems.length;i++){
+            let text = document.createTextNode(slots[i].toUpperCase());
+            listItems[i].appendChild(text);
+            let objectContainer = document.createElement('Ul');
+            objectContainer.id ='container'
+            listItems[i].appendChild(objectContainer)
+
+        }
+
+        const users = [
+            {id:1, name:'moe', slot:'first'},
+            {id:2, name:'larry', slot:'second'},
+            {id:3, name:'curly', slot:'third'},
+            {id:4, name:'lucy', slot:'first', selected:true}
+        ]
+
+
+        users.forEach(function(item) { //accessing elements of the object
+
+            let list = document.createElement("div");//create list names
+            list.id = item.id;
+            list.classList = item.name;
+            
+            let name = document.createTextNode(item.name);// create the innerhtml
+            list.appendChild(name); //adding the names to the list
+            document.getElementById('container').appendChild(list); //adding names to the container
+        });
+
+
+
+
+    </script>
+</body>
+</html>
