@@ -28,37 +28,36 @@
     </div>
 
     <script>
+
         const slots = ['first', 'second', 'third'];
 
-       
-        const listItems = document.querySelectorAll('div div');
-
+        const listItems = document.querySelectorAll('div div'); //selecting all the div elements of nodelist(3)
         //creating the left button
-        for(let i =0; i < listItems.length;i++){
+        listItems.forEach(item => {
             const leftButton = document.createElement('button');
-            leftButton.classList = 'left';
+            leftButton.id = 'left';
             const leftButtonText = document.createTextNode('<');
             leftButton.appendChild(leftButtonText);
-            listItems[i].appendChild(leftButton);
-        };
-        
-        //creating the right button 
-        for(let i =0; i < listItems.length;i++){
+            item.appendChild(leftButton);
+        })
+        //creating the the right button
+        listItems.forEach(item=>{
             const rightButton = document.createElement('button');
-            rightButton.classList ='right';
+            rightButton.id = 'right';
             const rightButtonText = document.createTextNode('>');
             rightButton.appendChild(rightButtonText);
-            listItems[i].appendChild(rightButton);
-        }
-        
-        //display the slot number data in the array
+            item.appendChild(rightButton);
+        });
+
+        //display the data from the array (FIRST, SECOND, THIRD )
         for(let i =0;i<listItems.length;i++){
             let text = document.createTextNode(slots[i].toUpperCase());
             listItems[i].appendChild(text);
-            let objectContainer = document.createElement('Ul');
-            objectContainer.id ='container'
-            listItems[i].appendChild(objectContainer)
 
+            let objectContainer = document.createElement('Ul');
+            objectContainer.id ='container';
+            objectContainer.classList= slots[i];
+            listItems[i].appendChild(objectContainer)
         }
 
         const users = [
@@ -68,19 +67,53 @@
             {id:4, name:'lucy', slot:'first', selected:true}
         ]
 
+        const render = () => {
+            users.forEach(user =>{
+            let userName = document.createElement('li');//create list names
+            userName.id = user.id;
 
-        users.forEach(function(item) { //accessing elements of the object
+            document.getElementById('container').appendChild(userName); //adding names to the container
 
-            let list = document.createElement("div");//create list names
-            list.id = item.id;
-            list.classList = item.name;
-            
-            let name = document.createTextNode(item.name);// create the innerhtml
-            list.appendChild(name); //adding the names to the list
-            document.getElementById('container').appendChild(list); //adding names to the container
-        });
+            userName.classList = ''; // when toggled it will change the class to the color
+            userName.innerHTML = user.name;
+            });
+        }
+
+        render();
+
+        const toggleColor = (ev) => {
+            if (ev.target.tagName === 'LI') {
+                ev.target.classList.toggle('selectName');
+            }
+        }
+
+        const list = document.getElementById('container');
+        list.addEventListener('click', toggleColor);
 
 
+        const rightButton = document.getElementById('right');
+        const leftButton = document.getElementById('left');
+
+
+        const moveRight = (ev) => {
+            let index = 0; 
+
+            if(ev.target.className.includes('selectName')){  
+                listItems[index+1]
+                render ();
+            }
+        }
+        
+        const moveLeft = (ev) => {
+            let index = 0;
+            if(ev.target.className.includes('selectName')){  
+                listItems[index-1]
+                render ();
+            }
+        }
+
+        rightButton.addEventListener('click',moveRight);
+        leftButton.addEventListener('click', moveLeft);
 
 
     </script>

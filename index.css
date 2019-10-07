@@ -17,3 +17,11 @@ body > div > div {
     flex-direction: column;
 }
 
+.selectName {
+    background: orangered;
+    width: 3rem;
+}
+
+ul {
+    list-style-type: none
+}
